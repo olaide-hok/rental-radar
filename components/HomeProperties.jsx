@@ -1,8 +1,10 @@
-import properties from '@/properties.json'
+// import properties from '@/properties.json'
 import PropertyCard from '@/components/PropertyCard'
 import Link from 'next/link'
+import {fetchProperties} from '@/utils/requests'
 
-const HomeProperties = () => {
+const HomeProperties = async () => {
+    const properties = await fetchProperties()
     const recentProperties = properties
         .sort(() => Math.random() - Math.random())
         .slice(0, 3)
@@ -15,7 +17,7 @@ const HomeProperties = () => {
                         Recent Properties
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {recentProperties ? (
+                        {recentProperties.length === 0 ? (
                             <p>No Properties Found</p>
                         ) : (
                             recentProperties.map((property) => (
