@@ -6,9 +6,7 @@ async function fetchProperties() {
         if (!apiDomain) {
             return []
         }
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`
-        )
+        const res = await fetch(`${apiDomain}/properties`)
 
         if (!res.ok) {
             throw new Error('Failed to fetch data')
