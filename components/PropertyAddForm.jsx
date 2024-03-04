@@ -31,9 +31,69 @@ const PropertyAddForm = () => {
         images: [],
     })
 
-    const handleChange = () => {}
-    const handleAmenitiesChange = () => {}
-    const handleImageChange = () => {}
+    const handleChange = (e) => {
+        const {name, value} = e.target
+
+        // Check if nested property
+        if (name.includes('.')) {
+            const [outerKey, innerKey] = name.split('.')
+
+            setFields((prevFields) => ({
+                ...prevFields,
+                [outerKey]: {
+                    ...prevFields[outerKey],
+                    [innerKey]: value,
+                },
+            }))
+        } else {
+            // Not nested
+            setFields((prevFields) => ({
+                ...prevFields,
+                [name]: value,
+            }))
+        }
+    }
+    const handleAmenitiesChange = (e) => {
+        const {value, checked} = e.target
+
+        // Clone te current array
+        const updatedAmenities = [...fields.amenities]
+
+        if (checked) {
+            // Add value to array
+            updatedAmenities.push(value)
+        } else {
+            // Remove value from array
+            const index = updatedAmenities.indexOf(value)
+
+            if (index !== -1) {
+                updatedAmenities.splece(index, 1)
+            }
+        }
+
+        // Update state with uodated array
+        setFields((prevFields) => ({
+            ...prevFields,
+            amenities: updatedAmenities,
+        }))
+    }
+    const handleImageChange = (e) => {
+        const {files} = e.target
+
+        // Clone images array
+        const updatedImages = [...fields.images]
+
+        // Add new files to the array
+        for (const file of files) {
+            updatedImages.push(file)
+        }
+
+        // Update state with array of images
+        setFields((prevFields) => ({
+            ...prevFields,
+            images: updatedImages,
+        }))
+    }
 
     useEffect(() => {
         setMounted(true)
@@ -281,7 +341,6 @@ const PropertyAddForm = () => {
                                 name="amenities"
                                 value="Hot Tub"
                                 className="mr-2"
-                                y
                                 checked={fields.amenities.includes('Hot Tub')}
                                 onChange={handleAmenitiesChange}
                             />
