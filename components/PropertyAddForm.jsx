@@ -67,7 +67,7 @@ const PropertyAddForm = () => {
             const index = updatedAmenities.indexOf(value)
 
             if (index !== -1) {
-                updatedAmenities.splece(index, 1)
+                updatedAmenities.splice(index, 1)
             }
         }
 
