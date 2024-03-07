@@ -1,10 +1,10 @@
 # Rental Radar
 
-> A web application to help you find your next rental property.
+> A platform for browsing and finding rental accommodations.
 
 ## Features
 
-Here are some of the current features that Property Pulse has:
+Here are some of the current features that Rental Radar has:
 
 -   [x] User authentication with Google & Next Auth
 -   [x] User authorization
